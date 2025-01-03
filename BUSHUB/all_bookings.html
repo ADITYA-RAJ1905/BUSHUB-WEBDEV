@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bookings - BusHub</title>
+    <link rel="stylesheet" href="bushub.css">
+    <style>
+        .booking-container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-container h4 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .booking-container p {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        header {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #bookingsSection {
+            padding: 20px;
+        }
+
+        .cancel-btn {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .cancel-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>All Bookings</h1>
+        <a href="bushub.html">Back to Home</a>
+    </header>
+    <main id="bookingsSection">
+        <div id="bookingsList"></div>
+    </main>
+
+    <script>
+        // Fetch bookings data and render
+        fetch('view_bookings.php')
+            .then(response => response.json())
+            .then(data => {
+                const bookingsList = document.getElementById('bookingsList');
+                bookingsList.innerHTML = '';
+
+                if (data.length > 0) {
+                    data.forEach(booking => {
+                        const bookingDiv = document.createElement('div');
+                        bookingDiv.classList.add('booking-container');
+                        bookingDiv.innerHTML = `
+                            <h4>Booking ID: ${booking.booking_id}</h4>
+                            <p><strong>Bus Number:</strong> ${booking.bus_number} (${booking.route_name})</p>
+                            <p><strong>Passenger Name:</strong> ${booking.passenger_name}</p>
+                            <p><strong>Adults:</strong> ${booking.num_adults}, <strong>Women:</strong> ${booking.num_women}, <strong>Children:</strong> ${booking.num_children}</p>
+                            <p><strong>Total Fare:</strong> ₹${booking.total_fare}</p>
+                            <p><strong>Date of Booking:</strong> ${booking.booking_date}</p>
+                            <button class="cancel-btn" onclick="cancelBooking(${booking.booking_id}, '${booking.bus_number}', ${booking.num_adults + booking.num_women + booking.num_children})">Cancel Ticket</button>
+                        `;
+                        bookingsList.appendChild(bookingDiv);
+                    });
+                } else {
+                    bookingsList.innerHTML = '<p>No bookings found.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('bookingsList').innerHTML = '<p>Error fetching bookings.</p>';
+            });
+
+        // Cancel booking function
+        function cancelBooking(bookingId, busNumber, seatsToRelease) {
+            if (confirm('Are you sure you want to cancel this booking?')) {
+                fetch('cancel_booking.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ booking_id: bookingId, bus_number: busNumber, seats_to_release: seatsToRelease }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Booking cancelled successfully!');
+                        location.reload(); // Reload the page to update the bookings list
+                    } else {
+                        alert('Error cancelling the booking: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error cancelling the booking.');
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Bus - BusHub</title>
+    <link rel="stylesheet" href="bushub.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="logo">BusHub</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="bushub.html">Home</a></li>
+                    <li><a href="bookbushub.html">Book a Bus</a></li>
+                    <li><a href="routesbushub.html">Routes</a></li>
+                    <li><a href="aboutusbushub.html">About Us</a></li>
+                    <li><a href="contactbushub.html">Contact Us</a></li>
+                    <li><a href="loginbushub.html">Login</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Booking Section -->
+    <section class="booking-section" id="book">
+        <h2>Find Your Perfect Bus</h2>
+        <form class="booking-form" id="bookingForm">
+            <label for="from">From:</label>
+            <select id="from" name="from" required>
+                <option value="">Select Departure City</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Dehradun">Dehradun</option>
+                <option value="Ghaziabad">Ghaziabad</option>
+                <option value="Saharanpur">Saharanpur</option>
+                <option value="Haridwar">Haridwar</option>
+            </select>
+
+            <label for="to">To:</label>
+            <select id="to" name="to" required>
+                <option value="">Select Destination City</option>
+                <option value="Roorkee">Roorkee</option>
+                <option value="Muzaffarnagar">Muzaffarnagar</option>
+                <option value="Hapur">Hapur</option>
+                <option value="Haldwani">Haldwani</option>
+                <option value="Almora">Almora</option>
+            </select>
+
+            <label for="date">Date of Travel:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit" id="searchBtn">Search Buses</button>
+        </form>
+        
+        <!-- Available Buses Section -->
+        <div class="available-buses" id="availableBuses" style="display:none;">
+            <h3>Available Buses:</h3>
+            <div id="busList"></div>
+        </div>
+
+        <!-- View All Bookings Button -->
+        <button id="viewBookingsBtn" onclick="redirectToBookings()">View All Bookings</button>
+
+    <script>
+        function redirectToBookings() {
+            window.location.href = 'all_bookings.html';
+        }
+
+        // Search Buses
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let from = document.getElementById('from').value;
+            let to = document.getElementById('to').value;
+            let date = document.getElementById('date').value;
+
+            if (from && to && date) {
+                // Show available buses section
+                document.getElementById('availableBuses').style.display = 'block';
+
+                fetch('available_buses.php', {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        from: from,
+                        to: to,
+                        date: date
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    let busList = document.getElementById('busList');
+                    busList.innerHTML = ''; // Clear previous data
+
+                    if (data.length > 0) {
+                        data.forEach(bus => {
+                            let busDiv = document.createElement('div');
+                            busDiv.innerHTML = `
+                                <h4>${bus.bus_number} - ${bus.route_name}</h4>
+                                <p>Seats Available: ${bus.seats}</p>
+                                <p>Fare: ₹${bus.fare_per_seat}</p>
+                                <button onclick="selectBus('${bus.bus_number}', '${bus.route_name}', ${bus.fare_per_seat})">Select this bus</button>
+                            `;
+                            busList.appendChild(busDiv);
+                        });
+                    } else {
+                        busList.innerHTML = '<p>No buses available for the selected route.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error fetching the buses.');
+                });
+            }
+        });
+
+        function selectBus(busNumber, routeName, fare) {
+            // Store the bus details in the session using a POST request
+            fetch('store_bus_in_session.php', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    bus_number: busNumber,
+                    route_name: routeName,
+                    fare_per_seat:fare
+                })
+            })
+            .then(response => {
+                // After successfully storing, redirect to the booking details page
+                window.location.href = 'booking_details.php';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+    </script>
+</body>
+</html>

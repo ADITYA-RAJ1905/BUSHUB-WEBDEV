@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusHub - Routes</title>
+    <link rel="stylesheet" href="routesbushub.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="logo">BusHub</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="bushub.html">Home</a></li>
+                    <li><a href="bookbushub.html">Book a Bus</a></li>
+                    <li><a href="routesbushub.html">Routes</a></li>
+                    <li><a href="aboutusbushub.html">About Us</a></li>
+                    <li><a href="contactbushub.html">Contact Us</a></li>
+                    <li><a href="loginbushub.html">Login</a></li>
+                    <li><a href="logout.php" onclick="logout()">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Routes Section -->
+    <section class="routes-section" id="routes">
+        <h2>Popular Routes</h2>
+        <p>Discover the most popular bus routes we offer. Whether you're traveling across the city or to another state, we've got you covered!</p>
+
+        <div class="route-list">
+            <div class="route-card">
+                <h3>Delhi-Roorkee</h3>
+                <p>Duration: 4 hours | Frequency: Every 30 minutes</p>
+            </div>
+            <div class="route-card">
+                <h3>Dehradun-Muzzafarnagar</h3>
+                <p>Duration: 6 hours | Frequency: Every 45 minutes</p>
+            </div>
+            <div class="route-card">
+                <h3>Ghaziabad-Hapur</h3>
+                <p>Duration: 5 hours | Frequency: Every hour</p>
+            </div>
+            <div class="route-card">
+                <h3>Saharanpur-Haldwani</h3>
+                <p>Duration: 4.5 hours | Frequency: Every 30 minutes</p>
+            </div>
+            <div class="route-card">
+                <h3>Haridwar-Almora</h3>
+                <p>Duration: 3.5 hours | Frequency: Every hour</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 BusHub | All Rights Reserved</p>
+            <p>Email: support@bushub.com | Phone: +123 456 7890</p>
+            <div class="social-media">
+                <a href="https://www.facebook.com/?_rdr">Facebook</a>
+                <a href="https://x.com/">Twitter</a>
+                <a href="https://www.instagram.com/">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Logout function to clear the session
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            alert('You have been logged out.');
+            window.location.href = 'loginbushub.html';
+        }
+    </script>
+</body>
+</html>

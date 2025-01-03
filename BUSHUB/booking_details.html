@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details - BusHub</title>
+    <link rel="stylesheet" href="bushub.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .details {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        input[type="number"] {
+            padding: 10px;
+            width: 100px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Details</h1>
+
+        <div class="details">
+            <p><strong>Bus Number:</strong> <span id="busNumber"></span></p>
+            <p><strong>Route Name:</strong> <span id="routeName"></span></p>
+            <p><strong>Fare per Seat:</strong> ₹<span id="farePerSeat"></span></p>
+        </div>
+
+        <!-- Input fields for number of passengers -->
+        <div class="input-group">
+            <label for="numAdults">Number of Adults:</label>
+            <input type="number" id="numAdults" min="1" value="1">
+        </div>
+
+        <div class="input-group">
+            <label for="numChildren">Number of Children:</label>
+            <input type="number" id="numChildren" min="0" value="0">
+        </div>
+
+        <!-- Button to calculate fare -->
+        <div class="input-group">
+            <button class="btn" id="calculateFareBtn">Calculate Fare</button>
+        </div>
+
+        <!-- Display the calculated total fare -->
+        <div class="details">
+            <p><strong>Total Fare:</strong> ₹<span id="totalFare">0</span></p>
+        </div>
+
+        <!-- Confirm booking button -->
+        <div class="input-group">
+            <button class="btn" id="confirmBookingBtn">Confirm Booking</button>
+        </div>
+    </div>
+
+    <script>
+        // Assuming bus details are stored in session or passed as parameters
+        document.getElementById('busNumber').textContent = '12345';  // Example bus number
+        document.getElementById('routeName').textContent = 'Delhi to Roorkee';  // Example route name
+        document.getElementById('farePerSeat').textContent = '500';  // Example fare per seat
+
+        const farePerSeat = parseInt(document.getElementById('farePerSeat').textContent);
+
+        // Calculate the total fare based on user input
+        document.getElementById('calculateFareBtn').addEventListener('click', function() {
+            const numAdults = parseInt(document.getElementById('numAdults').value) || 0;
+            const numChildren = parseInt(document.getElementById('numChildren').value) || 0;
+            const totalFare = (numAdults + numChildren) * farePerSeat;
+            document.getElementById('totalFare').textContent = totalFare;
+        });
+
+        // Confirm the booking
+        document.getElementById('confirmBookingBtn').addEventListener('click', function() {
+            // Add logic to handle booking confirmation, like sending data to the server
+            alert('Booking Confirmed!');
+
+            // You can redirect to a confirmation page or handle the logic here
+            window.location.href = 'booking_confirmation.html';
+        });
+    </script>
+</body>
+</html>

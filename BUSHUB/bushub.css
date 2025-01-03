@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: #004080;
+    padding: 10px 0;
+    color: #fff;
+}
+.logo {
+    display: flex; /* Align the text and image horizontally */
+    align-items: center; /* Vertically center-align text and image */
+    font-size: 1.5em; /* Adjust the font size for the title */
+    margin: 0;
+}
+
+.logo-image {
+    width: 40px; /* Adjust the size of the image */
+    height: auto; /* Maintain the aspect ratio */
+    margin-right: 10px; /* Add spacing between the image and the text */
+    vertical-align: middle; /* Ensure alignment with the text */
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav {
+    display: inline-block;
+    float: right;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Notice Section */
+.notices {
+    background-color: #ffdddd;
+    padding: 10px 0;
+    color: #cc0000;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Description Section */
+.description {
+    background-color: #e0f7fa;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.description h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #004080;
+}
+
+.description p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1em;
+}
+
+/* Booking Section */
+.booking-section {
+    background-color: #e6f2ff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.booking-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.booking-form input, .booking-form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.booking-form button {
+    background-color: #004080;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1em;
+    border: none;
+}
+
+.booking-form button:hover {
+    background-color: #003366;
+}
+
+/* Routes Section */
+.routes-section {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.routes-section h2 {
+    margin-bottom: 20px;
+}
+
+.routes-section ul {
+    list-style-type: none;
+}
+
+.routes-section li {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #f5f5f5;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer .social-media a {
+    color: #f5f5f5;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer .social-media a:hover {
+    color: #ddd;
+}
+/* Login Form Styles */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #004080;
+    margin-bottom: 20px;
+}
+
+.login-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #004080;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.login-container button:hover {
+    background-color: #003366;
+}
+
+.error-message {
+    color: red;
+    display: none;
+    margin-top: 10px;
+}
+/* Booking Section */
+.booking-section {
+    padding: 50px 20px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+.booking-section h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.booking-form {
+    display: inline-block;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form label {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.booking-form select, .booking-form input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.booking-form button {
+    padding: 10px 20px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.booking-form button:hover {
+    background-color: #003366;
+}
+
+/* Available Buses Section */
+.available-buses {
+    margin-top: 30px;
+}
+
+.bus-card {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 300
+}
